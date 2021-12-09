@@ -25,12 +25,9 @@ import io.paperdb.Paper;
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding activityMainBinding;
     private FirebaseAuth firebaseAuth;
-   // private String eMailAddress;
-   // private String password;
-   private SharedPreferences settings;
-    private SharedPreferences.Editor loginEditor;
+    private String eMailAddress;
+    private String password;
     private CheckBox checkBox;
-    private boolean isChecked;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,23 +35,21 @@ public class MainActivity extends AppCompatActivity {
         View view = activityMainBinding.getRoot();
         setContentView(view);
         firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         checkBox = (CheckBox) findViewById(R.id.checkBox);
         Paper.init(this);
-
-       String eMail = Paper.book().read(KeepSignStatus.mailAddress);
-       String passw = Paper.book().read(KeepSignStatus.password);
-       if( !("".equals(eMail)) && !("".equals(passw)) ){
+        String eMail = Paper.book().read(KeepSignStatus.mailAddress);
+        String passw = Paper.book().read(KeepSignStatus.password);
+        if( !("".equals(eMail)) && !("".equals(passw)) ){
             if( !TextUtils.isEmpty(eMail) && !TextUtils.isEmpty(passw)){
                 Intent intentAlreadyAuthenticated = new Intent(MainActivity.this, UploadImage.class);
                 startActivity(intentAlreadyAuthenticated);
                 finish();
             }
-       }
+        }
     }
-    public void signInClicked(View view){ //checkBox ayarla.
-        String eMailAddress = activityMainBinding.eMailText.getText().toString();
-        String password = activityMainBinding.passwordText.getText().toString();
+    public void signInClicked(View view){
+        eMailAddress = activityMainBinding.eMailText.getText().toString();
+        password = activityMainBinding.passwordText.getText().toString();
         if(checkBox.isChecked()){
             Paper.book().write(KeepSignStatus.mailAddress, eMailAddress);
             Paper.book().write(KeepSignStatus.password, password);
@@ -78,8 +73,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void signUpClicked(View view){
-        String eMailAddress = activityMainBinding.eMailText.getText().toString();
-        String password = activityMainBinding.passwordText.getText().toString();
+        eMailAddress = activityMainBinding.eMailText.getText().toString();
+        password = activityMainBinding.passwordText.getText().toString();
+        if(checkBox.isChecked()){
+            Paper.book().write(KeepSignStatus.mailAddress, eMailAddress);
+            Paper.book().write(KeepSignStatus.password, password);
+        }
         if( "".equals(eMailAddress) || "".equals(password) ){
             Toast.makeText(this, "E-mail or password can not be empty.", Toast.LENGTH_LONG).show();
         }else{

@@ -119,7 +119,7 @@ public class UploadImage extends MenuActivity {
                             firebaseFirestore.collection("Photos").add(hashMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
-                /* ***  */              Intent newIntent = new Intent(UploadImage.this, InnerActivity.class);
+                                        Intent newIntent = new Intent(UploadImage.this, InnerActivity.class);
                                         newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(newIntent);
                                 }

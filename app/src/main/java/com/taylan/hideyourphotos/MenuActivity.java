@@ -29,6 +29,10 @@ public class MenuActivity extends AppCompatActivity {
             Intent signOutIntent = new Intent(MenuActivity.this, MainActivity.class);
             startActivity(signOutIntent);
             finish();
+        }else if(item.getItemId() == R.id.addPost){
+            Intent addPostIntent = new Intent(MenuActivity.this, UploadImage.class);
+            startActivity(addPostIntent);
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }

@@ -27,6 +27,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -55,6 +56,7 @@ public class UploadImage extends MenuActivity {
         firebaseStorage = FirebaseStorage.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         storageReference = firebaseStorage.getReference();
+        firebaseFirestore = FirebaseFirestore.getInstance();
     }
 
     public void activityLauncherDefine(){
@@ -114,8 +116,9 @@ public class UploadImage extends MenuActivity {
                             FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                             String mailAddress = firebaseUser.getEmail();
                             HashMap<String, Object> hashMap = new HashMap<>();
-                            hashMap.put("mailAddress", mailAddress);
+                            hashMap.put("mailAddress", mailAddress); // binding.
                             hashMap.put("urlAddress", fetchedUrl);
+                            hashMap.put("date", FieldValue.serverTimestamp());
                             firebaseFirestore.collection("Photos").add(hashMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {

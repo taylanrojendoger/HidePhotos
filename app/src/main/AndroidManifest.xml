@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HideYourPhotos">
+        <activity android:name=".PinCodeEnterance"></activity>
         <activity android:name=".InnerActivity" />
         <activity android:name=".UploadImage" />
         <activity android:name=".MainActivity">

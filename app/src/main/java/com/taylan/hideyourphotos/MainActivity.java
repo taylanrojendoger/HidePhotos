@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         String passw = Paper.book().read(KeepSignStatus.password);
         if( !("".equals(eMail)) && !("".equals(passw)) ){
             if( !TextUtils.isEmpty(eMail) && !TextUtils.isEmpty(passw)){
-                Intent intentAlreadyAuthenticated = new Intent(MainActivity.this, UploadImage.class);
+                Intent intentAlreadyAuthenticated = new Intent(MainActivity.this, PinCodeEnterance.class);
                 startActivity(intentAlreadyAuthenticated);
                 finish();
             }

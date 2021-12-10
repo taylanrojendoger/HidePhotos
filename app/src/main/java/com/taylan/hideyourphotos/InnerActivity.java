@@ -21,7 +21,7 @@ import com.taylan.hideyourphotos.databinding.ActivityMainBinding;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class InnerActivity extends AppCompatActivity {
+public class InnerActivity extends MenuActivity {
     private ActivityInnerBinding activityInnerBinding;
     FirebaseFirestore firebaseFirestore;
     FirebaseAuth firebaseAuth;
